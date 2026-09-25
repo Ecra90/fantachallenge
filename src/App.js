@@ -103,27 +103,23 @@ function App() {
   };
 
   const startTimer = () => {
-    timerRef.current = setInterval(() => {
-      setTime((current) => {
-        if (current <= 1) {
-          clearInterval(timerRef.current);
-          finishGame();
-          return 0;
-        }
+    clearInterval(timerRef.current);
 
-        return current - 1;
-      });
+    timerRef.current = setInterval(() => {
+      setTime((current) => Math.max(current - 1, 0));
     }, 1000);
   };
 
-  const finishGame = () => {
-    setGameState("finished");
+  useEffect(() => {
+    if (gameState === "playing" && time === 0) {
+      clearInterval(timerRef.current);
 
-    setScore((currentScore) => {
+      setGameState("finished");
+
       setHighScore((currentHighScore) => {
         const newHighScore = Math.max(
           currentHighScore,
-          currentScore
+          score
         );
 
         localStorage.setItem(
@@ -134,11 +130,10 @@ function App() {
         return newHighScore;
       });
 
-      return currentScore;
-    });
+      playSound(300, 0.25);
+    }
+  }, [time, gameState, score]);
 
-    playSound(300, 0.25);
-  };
 
   const catchFanta = () => {
     if (gameState !== "playing") return;
