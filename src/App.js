@@ -197,10 +197,96 @@ function App() {
         </div>
 
         <div className="developer-badge">
-          &lt;/&gt; ECraDev
+          &lt;/&gt; EcraDev
         </div>
 
       </header>
+
+      {gameState === "finished" && (
+        <main className="screen">
+
+          <div className="card result-card">
+
+            <div className="result-icon">
+              🏆
+            </div>
+
+            <div className="tag">
+              CHALLENGE COMPLETE
+            </div>
+
+            <h2>
+              GAME
+              <br />
+              OVER!
+            </h2>
+
+            <p>
+              You scored
+            </p>
+
+            <div className="final-score">
+              {score}
+            </div>
+
+            <div className="results">
+
+              <div>
+                <span>🍊</span>
+
+                <strong>
+                  {score / 100}
+                </strong>
+
+                <small>
+                  Catches
+                </small>
+              </div>
+
+              <div>
+                <span>🔥</span>
+
+                <strong>
+                  {combo}
+                </strong>
+
+                <small>
+                  Combo
+                </small>
+              </div>
+
+              <div>
+                <span>🏆</span>
+
+                <strong>
+                  {Math.max(highScore, score)}
+                </strong>
+
+                <small>
+                  Best
+                </small>
+              </div>
+
+            </div>
+
+            <button
+              className="primary-button"
+              onClick={startGame}
+            >
+              PLAY AGAIN 🔥
+            </button>
+
+            <button
+              className="secondary-button"
+              onClick={resetGame}
+            >
+              BACK TO HOME
+            </button>
+
+          </div>
+
+        </main>
+      )}
 
       {gameState === "ready" && (
         <main className="screen">
