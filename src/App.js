@@ -9,6 +9,7 @@ function App() {
   const [time, setTime] = useState(GAME_TIME);
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(0);
+  const [newRecord, setNewRecord] = useState(false);
   const [highScore, setHighScore] = useState(
     Number(localStorage.getItem("fantaHighScore")) || 0
   );
@@ -75,6 +76,7 @@ function App() {
 
     setScore(0);
     setCombo(0);
+    setNewRecord(false);
     setTime(GAME_TIME);
     setCountdown(3);
     setCatching(false);
@@ -117,17 +119,18 @@ function App() {
       setGameState("finished");
 
       setHighScore((currentHighScore) => {
-        const newHighScore = Math.max(
-          currentHighScore,
-          score
-        );
+        if (score > currentHighScore) {
+          setNewRecord(true);
 
-        localStorage.setItem(
-          "fantaHighScore",
-          newHighScore
-        );
+          localStorage.setItem(
+            "fantaHighScore",
+            score
+          );
 
-        return newHighScore;
+          return score;
+        }
+
+        return currentHighScore;
       });
 
       playSound(300, 0.25);
@@ -203,7 +206,11 @@ function App() {
       </header>
 
       {gameState === "finished" && (
-        <main className="screen">
+        <main className="screen result-screen">
+
+          <div className="result-burst">
+            ✨
+          </div>
 
           <div className="card result-card">
 
@@ -215,23 +222,35 @@ function App() {
               CHALLENGE COMPLETE
             </div>
 
-            <h2>
+            <h2 className="game-over-title">
               GAME
               <br />
               OVER!
             </h2>
 
-            <p>
-              You scored
+            <p className="result-subtitle">
+              You caught the flavor!
             </p>
 
-            <div className="final-score">
-              {score}
+            <div className="score-box">
+
+              <span>
+                FINAL SCORE
+              </span>
+
+              <strong>
+                {score}
+              </strong>
+
+              <small>
+                POINTS
+              </small>
+
             </div>
 
             <div className="results">
 
-              <div>
+              <div className="result-stat">
                 <span>🍊</span>
 
                 <strong>
@@ -243,7 +262,7 @@ function App() {
                 </small>
               </div>
 
-              <div>
+              <div className="result-stat">
                 <span>🔥</span>
 
                 <strong>
@@ -255,7 +274,7 @@ function App() {
                 </small>
               </div>
 
-              <div>
+              <div className="result-stat">
                 <span>🏆</span>
 
                 <strong>
@@ -268,6 +287,12 @@ function App() {
               </div>
 
             </div>
+
+            {newRecord && (
+              <div className="new-record">
+                🎉 NEW HIGH SCORE!
+              </div>
+            )}
 
             <button
               className="primary-button"
@@ -282,6 +307,10 @@ function App() {
             >
               BACK TO HOME
             </button>
+
+            <div className="share-hint">
+              📱 Screenshot your score!
+            </div>
 
           </div>
 

@@ -1130,3 +1130,327 @@ footer {
       scale(0.8);
   }
 }
+/* =========================
+   GAME OVER SCREEN
+========================= */
+
+.result-screen {
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card {
+  position: relative;
+  z-index: 2;
+
+  animation: resultCardIn 0.6s ease-out;
+}
+
+.result-icon {
+  width: 82px;
+  height: 82px;
+
+  margin: 0 auto 15px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 166, 0, 0.15);
+
+  border:
+    2px solid
+    rgba(255, 190, 80, 0.5);
+
+  font-size: 42px;
+
+  animation:
+    trophyBounce 1s ease-out;
+}
+
+.game-over-title {
+  margin-top: 10px !important;
+
+  font-size: 48px !important;
+
+  line-height: 0.9 !important;
+
+  letter-spacing: -2px;
+
+  animation:
+    titlePop 0.7s ease-out;
+}
+
+.result-subtitle {
+  margin-top: 14px !important;
+
+  font-size: 14px !important;
+
+  opacity: 0.75;
+}
+
+.score-box {
+  margin: 25px auto 20px;
+
+  padding: 18px 30px;
+
+  width: min(280px, 90%);
+
+  border-radius: 20px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.14);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.score-box span {
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  opacity: 0.65;
+}
+
+.score-box strong {
+  margin: 3px 0;
+
+  font-size: 52px;
+
+  line-height: 1;
+
+  font-weight: 1000;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff,
+      #ffb347
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.score-box small {
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  opacity: 0.55;
+}
+
+.results {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin: 20px 0;
+}
+
+.result-stat {
+  padding: 13px 6px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.result-stat span {
+  font-size: 20px;
+}
+
+.result-stat strong {
+  margin-top: 5px;
+
+  font-size: 19px;
+
+  font-weight: 1000;
+}
+
+.result-stat small {
+  margin-top: 3px;
+
+  font-size: 9px;
+
+  opacity: 0.55;
+}
+
+.new-record {
+  display: inline-block;
+
+  margin: 5px auto 18px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 166, 0, 0.15);
+
+  border:
+    1px solid
+    rgba(255, 180, 50, 0.3);
+
+  font-size: 11px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+  animation:
+    recordPulse 1s infinite alternate;
+}
+
+.share-hint {
+  margin-top: 16px;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+}
+
+/* Decorative burst */
+
+.result-burst {
+  position: absolute;
+
+  top: 10%;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  font-size: 80px;
+
+  opacity: 0.12;
+
+  animation:
+    burstSpin 8s linear infinite;
+
+  pointer-events: none;
+}
+
+/* Animations */
+
+@keyframes resultCardIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes trophyBounce {
+
+  0% {
+    transform: scale(0) rotate(-20deg);
+  }
+
+  60% {
+    transform: scale(1.2) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes titlePop {
+
+  0% {
+    opacity: 0;
+
+    transform: scale(0.6);
+  }
+
+  70% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes recordPulse {
+
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes burstSpin {
+
+  from {
+    transform:
+      translateX(-50%)
+      rotate(0deg);
+  }
+
+  to {
+    transform:
+      translateX(-50%)
+      rotate(360deg);
+  }
+}
+
+@media (max-width: 600px) {
+
+  .game-over-title {
+    font-size: 42px !important;
+  }
+
+  .score-box strong {
+    font-size: 46px;
+  }
+
+  .results {
+    gap: 6px;
+  }
+
+  .result-stat {
+    padding: 11px 4px;
+  }
+}
