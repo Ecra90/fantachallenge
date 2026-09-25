@@ -1059,3 +1059,74 @@ footer {
     transform: scale(0.9);
   }
 }
+/* =========================
+   CATCH POPUP
+========================= */
+
+.catch-popup {
+  position: fixed;
+
+  left: 50%;
+  top: 42%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 42px;
+  font-weight: 1000;
+
+  color: white;
+
+  text-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4);
+
+  pointer-events: none;
+
+  animation: catchPopup 0.45s ease-out;
+}
+
+.catch-popup span {
+  margin-top: 3px;
+
+  font-size: 13px;
+
+  letter-spacing: 2px;
+
+  color: white;
+}
+
+@keyframes catchPopup {
+
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -30%)
+      scale(0.4);
+  }
+
+  30% {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      scale(1.25);
+  }
+
+  70% {
+    opacity: 1;
+    transform:
+      translate(-50%, -60%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -90%)
+      scale(0.8);
+  }
+}

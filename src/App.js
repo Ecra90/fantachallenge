@@ -20,6 +20,7 @@ function App() {
 
   const [catching, setCatching] = useState(false);
 
+  const [showCatch, setShowCatch] = useState(false);
   const timerRef = useRef(null);
   const countdownRef = useRef(null);
 
@@ -143,17 +144,25 @@ function App() {
     if (gameState !== "playing") return;
 
     setCatching(true);
+    setShowCatch(true);
 
     setTimeout(() => {
       setCatching(false);
-    }, 150);
+    }, 180);
+
+    setTimeout(() => {
+      setShowCatch(false);
+    }, 450);
 
     setScore((current) => current + 100);
+
     setCombo((current) => current + 1);
 
     moveTarget();
 
-    playSound(700 + Math.min(combo * 20, 300));
+    playSound(
+      700 + Math.min(combo * 20, 300)
+    );
   };
 
   useEffect(() => {
@@ -335,6 +344,12 @@ function App() {
             TAP IT! 🍊
           </div>
 
+          {showCatch && (
+            <div className="catch-popup">
+              +100
+              <span>🔥 NICE CATCH!</span>
+            </div>
+          )}
         </main>
       )}
 
